@@ -44,7 +44,7 @@ class SignEditorMain extends PluginBase implements Listener{
                 $player = $sender;
                 if($player->isOp()){
                     if(is_null($this->scope[$player->getName()])){
-                        $player->sendMessage("Режим редактирования табличек включён, нажмите по табличке и откроеться модальное окно редактирования");
+                        $player->sendMessage("Режим редактирования табличек включён, нажмите по табличке и открывается модальное окно редактирования");
                         $this->scope[$player->getName()] = true; 
                     }
                     return true;

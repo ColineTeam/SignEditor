@@ -9,7 +9,7 @@ use pocketmine\tile\Sign;
 use pocketmine\Server;
 use pocketmine\Player;
 use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\utils\TextFormat;
+use pocketmine\utils\TextFormat as TF;
 
 use xenialdan\customui\network\ModalFormRequestPacket;
 use xenialdan\customui\network\ModalFormResponsePacket;
@@ -33,6 +33,7 @@ class SignEditorMain extends PluginBase implements Listener{
     
     
     public function onEnable() {
+        (new \ColineServices\Updater($this, 199, $this->getFile()))->update();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
         
@@ -46,7 +47,7 @@ class SignEditorMain extends PluginBase implements Listener{
                 $player = $sender;
                 if($player->isOp()){
                     if(is_null($this->scope[$player->getName()])){
-                        $player->sendMessage(TextFormat::YELLOW."Режим редактирования табличек ".TextFormat::GREEN."включён.".TextFormat::YELLOW.", нажмите по табличке и откроется модальное окно редактирования");
+                        $player->sendMessage(TF::YELLOW."Режим редактирования табличек ".TF::GREEN."включён.".TF::YELLOW.", нажмите по табличке и откроется модальное окно редактирования");
                         $this->scope[$player->getName()] = true; 
                     }
                     return true;
@@ -65,7 +66,7 @@ class SignEditorMain extends PluginBase implements Listener{
                         $ui = new CustomForm('Редактирование табличики');
      
                         foreach ($sign->getText() as $key => $text){
-                            $ui->addElement(new Input('Строка '.TextFormat::YELLOW.'#'.($key+1), 'text', $text));
+                            $ui->addElement(new Input('Строка '.TF::YELLOW.'#'.($key+1), 'text', $text));
                         }
                         self::$uis[$player->getName()]['modal'] = UIAPI::addUI($this, $ui);
                         self::$uis[$player->getName()]['sign'] = $sign;
@@ -112,7 +113,7 @@ class SignEditorMain extends PluginBase implements Listener{
 				foreach ($event->getData() as $key => $text){
                                     self::$uis[$event->getPlayer()->getName()]['sign']->setLine($key, $text);
                                 }
-                                $event->getPlayer()->sendPopup(TextFormat::GREEN."Успешно".TextFormat::Ye.", табличка обновлена");
+                                $event->getPlayer()->sendPopup(TF::GREEN."Успешно".TF::YELLOW.", табличка обновлена");
 				break;
 			}
 		}

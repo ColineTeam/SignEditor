@@ -47,8 +47,11 @@ class SignEditorMain extends PluginBase implements Listener{
                 $player = $sender;
                 if($player->isOp()){
                     if(is_null($this->scope[$player->getName()])){
-                        $player->sendMessage(TF::YELLOW."Режим редактирования табличек ".TF::GREEN."включён.".TF::YELLOW.", нажмите по табличке и откроется модальное окно редактирования");
+                        $player->sendMessage(TF::YELLOW."Режим редактирования табличек ".TF::GREEN."включён.".TF::YELLOW.", нажмите по табличке и откроется модальное окно редактирования. Чтобы отключить напишите комманду повторно");
                         $this->scope[$player->getName()] = true; 
+                    }elseif ($this->scope[$player->getName()] == true) {
+                        $player->sendMessage(TF::YELLOW."Режим редактирования табличек ".TF::RED."отключён");
+                        $this->scope[$player->getName()] = FALSE; 
                     }
                     return true;
                 }

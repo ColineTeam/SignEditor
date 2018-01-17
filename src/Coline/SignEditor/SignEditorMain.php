@@ -46,8 +46,8 @@ class SignEditorMain extends PluginBase implements Listener{
             if($sender instanceof \pocketmine\Player){
                 $player = $sender;
                 if($player->isOp()){
-                    if(is_null($this->scope[$player->getName()])){
-                        if($this->scope[$player->getName()] == true){
+                        if(is_null($this->scope[$player->getName()])) $this->scope[$player->getName()] = false;
+                        if($this->scope[$player->getName()] == false){
                             $player->sendMessage(TF::YELLOW."Режим редактирования табличек ".TF::GREEN."включён.".TF::YELLOW.", нажмите по табличке и откроется модальное окно редактирования. Чтобы отключить напишите комманду повторно");
                             $this->scope[$player->getName()] = true; 
                         }elseif ($this->scope[$player->getName()] == true) {
@@ -56,7 +56,7 @@ class SignEditorMain extends PluginBase implements Listener{
                         }
                         return true;
                     }
-                }
+                
             }
         }
     }

@@ -9,6 +9,7 @@ use pocketmine\tile\Sign;
 use pocketmine\Server;
 use pocketmine\Player;
 use pocketmine\event\server\DataPacketReceiveEvent;
+use pocketmine\utils\TextFormat;
 
 use xenialdan\customui\network\ModalFormRequestPacket;
 use xenialdan\customui\network\ModalFormResponsePacket;
@@ -19,6 +20,7 @@ use xenialdan\customui\elements\Input;
 use xenialdan\customui\API as UIAPI;
 use xenialdan\customui\event\UICloseEvent;
 use xenialdan\customui\event\UIDataReceiveEvent;
+
 
 /**
  * Редактирование табличек для Pocketmine by ColineTeam
@@ -44,7 +46,7 @@ class SignEditorMain extends PluginBase implements Listener{
                 $player = $sender;
                 if($player->isOp()){
                     if(is_null($this->scope[$player->getName()])){
-                        $player->sendMessage("Режим редактирования табличек включён, нажмите по табличке и откроется модальное окно редактирования");
+                        $player->sendMessage(TextFormat::YELLOW."Режим редактирования табличек ".TextFormat::GREEN."включён.".TextFormat::YELLOW.", нажмите по табличке и откроется модальное окно редактирования");
                         $this->scope[$player->getName()] = true; 
                     }
                     return true;
@@ -63,7 +65,7 @@ class SignEditorMain extends PluginBase implements Listener{
                         $ui = new CustomForm('Редактирование табличики');
      
                         foreach ($sign->getText() as $key => $text){
-                            $ui->addElement(new Input('Строка #'.($key+1), 'text', $text));
+                            $ui->addElement(new Input('Строка '.TextFormat::YELLOW.'#'.($key+1), 'text', $text));
                         }
                         self::$uis[$player->getName()]['modal'] = UIAPI::addUI($this, $ui);
                         self::$uis[$player->getName()]['sign'] = $sign;
@@ -109,8 +111,8 @@ class SignEditorMain extends PluginBase implements Listener{
 			case self::$uis[$event->getPlayer()->getName()]['modal']: {
 				foreach ($event->getData() as $key => $text){
                                     self::$uis[$event->getPlayer()->getName()]['sign']->setLine($key, $text);
-                                    $event->getPlayer()->sendPopup("Успешно, табличка обновлена");
                                 }
+                                $event->getPlayer()->sendPopup(TextFormat::GREEN."Успешно".TextFormat::Ye.", табличка обновлена");
 				break;
 			}
 		}

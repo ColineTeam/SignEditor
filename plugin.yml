@@ -8,3 +8,6 @@ website: PMine.ru
 commands:
     signedit:
         aliases: [sedit]
+permissions:
+ singedit.use:
+    default: op

@@ -39,9 +39,9 @@ class SignEditorMain extends PluginBase implements Listener{
     }
      public function initializeLanguage(){
             switch ($this->getServer()->getProperty("settings.language")){
-//                case "eng":
-//                    $lang = "eng";
-//                break;
+                case "eng":
+                    $lang = "eng";
+                break;
                 default:
                     $lang = "rus";
                 break;

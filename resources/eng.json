@@ -2,7 +2,7 @@
     "signedit_start": "Edit mode §aenabled.§e, tap on sign what you want to change. To disable edit mode you need write command again",
     "signedit_stop": "Edit mode §cdisabled",
     "sign_edit": "Edit of sign",
-    "string": "line",
+    "string": "Line",
     "success_change": "Success§e, sign has been updated"
     
     
